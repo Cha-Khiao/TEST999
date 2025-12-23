@@ -1,8 +1,8 @@
-// src/app/layout.tsx
 import './globals.scss';
 import { Kanit } from 'next/font/google';
 import ThemeProvider from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer'; // Import มา
 
 const kanit = Kanit({ 
   weight: ['300', '400', '500', '700'],
@@ -20,28 +20,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Script นี้จะทำงานก่อนที่หน้าเว็บจะแสดงผล ทำให้รู้ทันทีว่าต้องเป็นธีมอะไร
-  const themeScript = `
-    (function() {
-      try {
-        const storedTheme = localStorage.getItem('theme');
-        const theme = storedTheme || 'light';
-        document.documentElement.setAttribute('data-bs-theme', theme);
-      } catch (e) {}
-    })()
-  `;
-
   return (
     <html lang="th">
-      <body className={kanit.className}>
-        {/* เพิ่มบรรทัดนี้ลงไปเป็นสิ่งแรกใน Body */}
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        
+      <body className={`${kanit.className} d-flex flex-column min-vh-100`}> {/* เพิ่ม flex ให้ footer อยู่ล่างสุด */}
         <ThemeProvider>
           <Navbar />
-          <main className="py-4">
+          <main className="py-4 flex-grow-1"> {/* ให้ main ขยายเต็มพื้นที่ */}
             {children}
           </main>
+          <Footer /> {/* ใส่ Footer ตรงนี้ */}
         </ThemeProvider>
       </body>
     </html>
