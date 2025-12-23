@@ -1,0 +1,17 @@
+// src/app/globals.scss
+@import "~bootstrap/scss/bootstrap";
+
+// เราไม่ต้องกำหนดสีพื้นหลัง/ตัวหนังสือเองแล้ว Bootstrap จัดการให้หมด
+body {
+  font-family: var(--font-kanit), sans-serif;
+  // เพิ่ม transition เพื่อให้ตอนเปลี่ยนสีนุ่มนวลขึ้น
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// ปรับแต่งเพิ่มเติมเล็กน้อย (Optional)
+// ถ้าอยากให้ Card ในโหมดมืดดูเด่นขึ้นอีกนิด
+[data-bs-theme="dark"] {
+  .card {
+    border-color: #495057; // ขอบการ์ดสีเทาเข้ม
+  }
+}
