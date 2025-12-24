@@ -1,34 +1,45 @@
-// src/components/ThemeProvider.tsx
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
 
-const ThemeContext = createContext<{
+interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
-}>({ theme: 'light', toggleTheme: () => {} });
+}
 
-export const useTheme = () => useContext(ThemeContext);
+// สร้าง Context
+const ThemeContext = createContext<ThemeContextType>({
+  theme: 'light',
+  toggleTheme: () => {},
+});
 
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+// *** ต้องเป็น export function (Named Export) ***
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const savedTheme = (localStorage.getItem('theme') as Theme) || 'light';
-    setTheme(savedTheme);
-    // เพิ่มบรรทัดนี้: สั่ง Bootstrap ให้เปลี่ยนธีม
-    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+    const storedTheme = localStorage.getItem('theme') as Theme;
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+    setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme, mounted]);
+
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    // เพิ่มบรรทัดนี้: สั่ง Bootstrap ให้เปลี่ยนธีมทันที
-    document.documentElement.setAttribute('data-bs-theme', newTheme);
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
+
+  if (!mounted) return <>{children}</>;
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -36,3 +47,6 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     </ThemeContext.Provider>
   );
 }
+
+// Export Hook
+export const useTheme = () => useContext(ThemeContext);

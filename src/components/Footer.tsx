@@ -1,7 +1,14 @@
 'use client';
+
 import { Container } from 'react-bootstrap';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // ถ้าเป็นหน้า Admin หรือ Login ไม่ต้องโชว์ Footer
+  if (pathname.startsWith('/admin') || pathname === '/login') return null;
+
   return (
     <footer className="py-4 mt-auto border-top bg-body-tertiary">
       <Container className="text-center text-muted small">

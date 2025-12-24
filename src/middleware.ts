@@ -13,18 +13,18 @@ export function middleware(request: NextRequest) {
   // 2. ป้องกัน API ของ Admin (Backend)
   if (pathname.startsWith('/api')) {
     // รายการ API ที่อนุญาตให้เข้าถึงได้โดยไม่ต้อง Login
-    const isPublicApi = 
-        pathname === '/api/login' || 
-        pathname === '/api/seed-admin' || 
-        pathname === '/api/centers' || 
-        pathname === '/api/items' || // ให้หน้าบ้านดึงของไปโชว์ได้ (ถ้าต้องการ)
-        (pathname === '/api/transactions' && request.method === 'POST'); // หน้าบ้านบริจาคได้
+    const isPublicApi =
+      pathname === '/api/login' ||
+      pathname === '/api/seed-admin' ||
+      pathname === '/api/centers' ||
+      pathname === '/api/items' || // ให้หน้าบ้านดึงของไปโชว์ได้ (ถ้าต้องการ)
+      (pathname === '/api/transactions' && request.method === 'POST'); // หน้าบ้านบริจาคได้
 
     if (!isPublicApi && !token) {
-        return NextResponse.json(
-            { error: 'Unauthorized: กรุณาเข้าสู่ระบบ' }, 
-            { status: 401 }
-        );
+      return NextResponse.json(
+        { error: 'Unauthorized: กรุณาเข้าสู่ระบบ' },
+        { status: 401 }
+      );
     }
   }
 

@@ -1,102 +1,70 @@
-// src/components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
 import { useTheme } from './ThemeProvider';
 import { Container, Navbar as BsNavbar, Nav, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { MoonStarsFill, SunFill, PersonCircle } from 'react-bootstrap-icons';
+
+import RequisitionModal from './RequisitionModal';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // เช็คสถานะล็อกอิน
+  const [showRequisition, setShowRequisition] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
-  useEffect(() => {
-    setMounted(true);
-    // เช็ค Cookie แบบง่ายๆ ว่ามี auth_token ไหม (สำหรับ UI เท่านั้น Security จริงอยู่ที่ Middleware)
-    const checkLogin = () => {
-        const cookies = document.cookie.split(';');
-        const hasAuth = cookies.some(c => c.trim().startsWith('auth_token='));
-        setIsLoggedIn(hasAuth);
-    };
-    checkLogin();
-  }, [pathname]); // เช็คใหม่ทุกครั้งที่เปลี่ยนหน้า
-
-  const handleLogout = async () => {
-    // ลบ Cookie
-    document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    setIsLoggedIn(false);
-    
-    Swal.fire({
-        icon: 'success',
-        title: 'ออกจากระบบแล้ว',
-        timer: 1500,
-        showConfirmButton: false
-    });
-    
-    router.push('/login');
-    router.refresh();
-  };
+  useEffect(() => { setMounted(true); }, []);
 
   if (!mounted) return null;
 
-  // ซ่อน Navbar ในหน้า Login เพื่อความสวยงาม
-  if (pathname === '/login') return null;
+  // --- เพิ่มตรงนี้: ซ่อน Navbar ถ้าเป็นหน้า Admin หรือ Login ---
+  if (pathname.startsWith('/admin') || pathname === '/login') return null;
 
   return (
-    <BsNavbar expand="lg" className="shadow-sm sticky-top" style={{ backgroundColor: theme === 'dark' ? '#1a1e21' : '#ffffff' }} variant={theme}>
-      <Container>
-        <Link href="/" passHref legacyBehavior>
-          <BsNavbar.Brand className="fw-bold text-primary">
-            💙 Donation System
-          </BsNavbar.Brand>
-        </Link>
-        <BsNavbar.Toggle aria-controls="basic-navbar-nav" />
-        <BsNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto align-items-center gap-2">
-            
-            <Link href="/" passHref legacyBehavior>
-              <Nav.Link active={pathname === '/'}>หน้าหลัก</Nav.Link>
-            </Link>
+    <>
+      <BsNavbar expand="lg" className="sticky-top py-3 shadow-sm" variant={theme} style={{ zIndex: 1030 }}>
+        <Container>
+          <Link href="/" passHref legacyBehavior>
+            <BsNavbar.Brand className="fw-bold text-primary d-flex align-items-center gap-2 fs-4">
+              💙 Donation System
+            </BsNavbar.Brand>
+          </Link>
+          <BsNavbar.Toggle aria-controls="navbar-nav" className="border-0 shadow-none" />
+          <BsNavbar.Collapse id="navbar-nav">
+            <Nav className="ms-auto align-items-center gap-2 mt-3 mt-lg-0">
 
-            {/* แสดงเมนู Admin เฉพาะตอนล็อกอินแล้ว */}
-            {isLoggedIn && (
-                <Link href="/admin" passHref legacyBehavior>
-                <Nav.Link active={pathname === '/admin'}>จัดการข้อมูล (Admin)</Nav.Link>
-                </Link>
-            )}
+              <Button
+                variant={theme === 'light' ? 'light' : 'dark'}
+                onClick={toggleTheme}
+                className="rounded-circle p-2 d-flex align-items-center justify-content-center border me-2"
+                style={{ width: '38px', height: '38px' }}
+              >
+                {theme === 'light' ? <MoonStarsFill /> : <SunFill className="text-warning" />}
+              </Button>
 
-            <div className="vr d-none d-lg-block mx-2"></div>
+              <Button
+                variant="outline-primary text-primary"
+                size="sm"
+                className="rounded-pill px-3 d-flex align-items-center gap-1 shadow-sm"
+                onClick={() => setShowRequisition(true)}
+              >
+                <i className="bi bi-box-seam"></i> เบิกของ
+              </Button>
 
-            <Button 
-              variant={theme === 'light' ? 'outline-dark' : 'outline-light'} 
-              size="sm" 
-              onClick={toggleTheme}
-              className="rounded-pill px-3"
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </Button>
-
-             {/* ปุ่ม Login / Logout */}
-             {isLoggedIn ? (
-                <Button variant="danger" size="sm" className="rounded-pill px-3 ms-2" onClick={handleLogout}>
-                    Logout
+              <Link href="/login">
+                <Button variant="primary" size="sm" className="rounded-pill px-4 d-flex align-items-center gap-2 fw-bold ms-1 shadow-sm">
+                  <PersonCircle /> เข้าสู่ระบบ
                 </Button>
-             ) : (
-                <Link href="/login">
-                    <Button variant="primary" size="sm" className="rounded-pill px-3 ms-2">
-                        เจ้าหน้าที่ Login
-                    </Button>
-                </Link>
-             )}
+              </Link>
+            </Nav>
+          </BsNavbar.Collapse>
+        </Container>
+      </BsNavbar>
 
-          </Nav>
-        </BsNavbar.Collapse>
-      </Container>
-    </BsNavbar>
+      <RequisitionModal show={showRequisition} onHide={() => setShowRequisition(false)} />
+    </>
   );
 }

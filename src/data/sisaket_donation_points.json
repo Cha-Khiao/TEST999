@@ -1,0 +1,159 @@
+[
+  {
+    "name": "ศาลากลางจังหวัดศรีสะเกษ (จุดรับบริจาคหลัก)",
+    "location": "15.118329, 104.322197",
+    "district": "เมืองศรีสะเกษ",
+    "subdistrict": "เมืองเหนือ",
+    "phoneNumbers": [
+      "045-611-333",
+      "081-999-8888"
+    ],
+    "capacity": 10000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "นายสมชาย มั่นคง (หน.ปภ.จังหวัด)"
+  },
+  {
+    "name": "มหาวิทยาลัยราชภัฏศรีสะเกษ (อาคารเฉลิมพระเกียรติ)",
+    "location": "15.138450, 104.305210",
+    "district": "เมืองศรีสะเกษ",
+    "subdistrict": "โพธิ์",
+    "phoneNumbers": [
+      "045-643-600"
+    ],
+    "capacity": 5000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "ผศ.ดร.วิภา รักถิ่น"
+  },
+  {
+    "name": "ที่ว่าการอำเภอกันทรลักษ์",
+    "location": "14.640556, 104.650833",
+    "district": "กันทรลักษ์",
+    "subdistrict": "หนองหญ้าลาด",
+    "phoneNumbers": [
+      "045-661-444"
+    ],
+    "capacity": 3000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "นายอำเภอสุรชัย ใจดี"
+  },
+  {
+    "name": "วัดสระกำแพงใหญ่ (ลานธรรม)",
+    "location": "15.101500, 104.145200",
+    "district": "อุทุมพรพิสัย",
+    "subdistrict": "สระกำแพงใหญ่",
+    "phoneNumbers": [
+      "089-123-4567"
+    ],
+    "capacity": 2000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "พระครูวินัย (กรรมการวัด)"
+  },
+  {
+    "name": "หอประชุมอำเภอขุขันธ์",
+    "location": "14.712500, 104.198800",
+    "district": "ขุขันธ์",
+    "subdistrict": "ห้วยเหนือ",
+    "phoneNumbers": [
+      "045-671-111"
+    ],
+    "capacity": 4000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "ปลัดสมศักดิ์ รักชาติ"
+  },
+  {
+    "name": "โรงพยาบาลราษีไศล (อาคารผู้ป่วยนอกเก่า)",
+    "location": "15.340200, 104.153500",
+    "district": "ราษีไศล",
+    "subdistrict": "เมืองคง",
+    "phoneNumbers": [
+      "045-681-123"
+    ],
+    "capacity": 1500,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "คุณพรทิพย์ (หัวหน้าพยาบาล)"
+  },
+  {
+    "name": "โรงเรียนกันทรารมณ์ (หอประชุม)",
+    "location": "15.110500, 104.430200",
+    "district": "กันทรารมย์",
+    "subdistrict": "ดูน",
+    "phoneNumbers": [
+      "045-651-222"
+    ],
+    "capacity": 2500,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "ผอ.สมบัติ การศึกษา"
+  },
+  {
+    "name": "ที่ว่าการอำเภอปรางค์กู่",
+    "location": "14.856000, 104.032000",
+    "district": "ปรางค์กู่",
+    "subdistrict": "พิมาย",
+    "phoneNumbers": [
+      "045-691-333"
+    ],
+    "capacity": 1200,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "นายอำเภอวิชัย"
+  },
+  {
+    "name": "สวนสาธารณะอำเภอขุนหาญ",
+    "location": "14.615000, 104.420000",
+    "district": "ขุนหาญ",
+    "subdistrict": "สิ",
+    "phoneNumbers": [
+      "045-672-444"
+    ],
+    "capacity": 3000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "คุณมานพ (อบต.)"
+  },
+  {
+    "name": "ที่ว่าการอำเภอยางชุมน้อย",
+    "location": "15.220000, 104.350000",
+    "district": "ยางชุมน้อย",
+    "subdistrict": "ยางชุมน้อย",
+    "phoneNumbers": [
+      "045-686-555"
+    ],
+    "capacity": 1000,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "ปลัดอารีย์"
+  },
+  {
+    "name": "สถานีรถไฟห้วยทับทัน (จุดพักคอย)",
+    "location": "15.080000, 104.020000",
+    "district": "ห้วยทับทัน",
+    "subdistrict": "ห้วยทับทัน",
+    "phoneNumbers": [
+      "045-699-123"
+    ],
+    "capacity": 800,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "นายสถานีสมยศ"
+  },
+  {
+    "name": "วัดศรีรัตนะ (ศาลาการเปรียญ)",
+    "location": "14.780000, 104.550000",
+    "district": "ศรีรัตนะ",
+    "subdistrict": "ศรีแก้ว",
+    "phoneNumbers": [
+      "081-555-6666"
+    ],
+    "capacity": 1500,
+    "status": "active",
+    "type": "DONATION_POINT",
+    "contactPerson": "กำนันบุญมี"
+  }
+]

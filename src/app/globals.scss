@@ -1,17 +1,138 @@
-// src/app/globals.scss
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
 
-// เราไม่ต้องกำหนดสีพื้นหลัง/ตัวหนังสือเองแล้ว Bootstrap จัดการให้หมด
+:root {
+  --font-kanit: 'Kanit', sans-serif;
+  --primary-color: #0d6efd;
+  --border-radius-lg: 1rem;
+}
+
 body {
-  font-family: var(--font-kanit), sans-serif;
-  // เพิ่ม transition เพื่อให้ตอนเปลี่ยนสีนุ่มนวลขึ้น
+  font-family: var(--font-kanit);
+  background-color: #f0f2f5; 
+  /* transition: background-color 0.3s ease; <-- เอาออกแก้หน่วง */
+}
+
+/* Modern Card Styling */
+.card {
+  border: none;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  background-color: var(--bs-body-bg); /* Use Bootstrap var */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Navbar Styling */
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bs-tertiary-bg); }
+::-webkit-scrollbar-thumb { background: var(--bs-secondary); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--bs-secondary-bg-subtle); }
+
+/* Dark Mode Overrides */
+[data-bs-theme="dark"] {
+  --bs-body-bg: #121212;
+  --bs-body-color: #e0e0e0;
+  
+  body { 
+    background-color: #121212; 
+    color: #e0e0e0;
+  }
+  
+  .navbar {
+    background-color: rgba(33, 37, 41, 0.95) !important;
+    border-bottom: 1px solid #2d2d2d;
+  }
+
+  .card {
+    background-color: #1e1e1e;
+    box-shadow: none;
+    border: 1px solid #2d2d2d;
+    &:hover {
+      background-color: #252525;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Modals */
+  .modal-content {
+    background-color: #1e1e1e;
+    border: 1px solid #2d2d2d;
+  }
+  .modal-header, .modal-footer {
+    border-color: #2d2d2d;
+  }
+  .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+
+  /* Tables */
+  .table {
+    --bs-table-color: #e0e0e0;
+    --bs-table-bg: #1e1e1e;
+    --bs-table-border-color: #2d2d2d;
+    --bs-table-striped-bg: #252525;
+    --bs-table-hover-bg: #2a2a2a;
+    color: #e0e0e0;
+  }
+
+  /* Forms */
+  .form-control, .form-select {
+    background-color: #252525;
+    border-color: #333;
+    color: #e0e0e0;
+    &:focus {
+      background-color: #2a2a2a;
+      border-color: var(--primary-color);
+      color: #fff;
+    }
+    &::placeholder {
+      color: #6c757d;
+    }
+  }
+  .input-group-text {
+    background-color: #2a2a2a;
+    border-color: #333;
+    color: #e0e0e0;
+  }
+
+  /* Utils */
+  .text-muted { color: #adb5bd !important; }
+  .bg-light { background-color: #252525 !important; }
+  .bg-white { background-color: #1e1e1e !important; }
+  .border { border-color: #2d2d2d !important; }
+}
+
+.text-decoration-none { text-decoration: none !important; }
+.hover-primary:hover { color: var(--primary-color) !important; }
+
+
+body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-// ปรับแต่งเพิ่มเติมเล็กน้อย (Optional)
-// ถ้าอยากให้ Card ในโหมดมืดดูเด่นขึ้นอีกนิด
-[data-bs-theme="dark"] {
-  .card {
-    border-color: #495057; // ขอบการ์ดสีเทาเข้ม
+/* ทำให้ Hover ใน Sidebar สวยขึ้นใน Dark Mode */
+.hover-bg-secondary-subtle:hover {
+    background-color: var(--bs-secondary-bg-subtle);
+}
+
+/* Custom Utilities for Consistency */
+.bg-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  [data-bs-theme="dark"] & {
+    background: rgba(30, 30, 30, 0.8);
   }
 }

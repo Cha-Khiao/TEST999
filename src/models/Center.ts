@@ -4,25 +4,35 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ICenter extends Document {
   name: string;
   location?: string;
-  district?: string;
+  district: string;
   subdistrict?: string;
+  phoneNumbers: string[];
   capacity?: number;
-  capacityStatus?: string;
+  status: 'active' | 'inactive';
   shelterType?: string;
-  phoneNumbers?: string[];
-  status: string;
+  contactPerson?: string;
+  type: 'DONATION_POINT' | 'SHELTER';
 }
 
 const CenterSchema: Schema = new Schema({
   name: { type: String, required: true },
   location: { type: String },
-  district: { type: String },
+  district: { type: String, required: true },
   subdistrict: { type: String },
+  phoneNumbers: [{ type: String }],
   capacity: { type: Number },
-  capacityStatus: { type: String },
-  shelterType: { type: String },
-  phoneNumbers: { type: [String] },
   status: { type: String, default: 'active' },
+  shelterType: { type: String },
+  contactPerson: { type: String },
+
+  type: {
+    type: String,
+    enum: ['DONATION_POINT', 'SHELTER'],
+    default: 'SHELTER'
+  }
 }, { timestamps: true });
 
-export default mongoose.models.Center || mongoose.model<ICenter>('Center', CenterSchema);
+// Check if the model is already compiled to avoid OverwriteModelError
+const Center = mongoose.models.Center || mongoose.model<ICenter>('Center', CenterSchema);
+
+export default Center;
